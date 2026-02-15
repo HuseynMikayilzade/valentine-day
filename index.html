@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Valentine’s Message</title>
+
+    <!-- Elegant romantic fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- GSAP (lightweight animation helper) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="bg" id="parallaxBg">
+        <canvas id="particlesCanvas"></canvas>
+        <div class="shimmer"></div>
+    </div>
+    <div class="vignette"></div>
+
+    <!-- Roses (opening bloom) -->
+    <div class="roses" aria-hidden="true">
+        <!-- Left rose -->
+        <svg class="rose" id="roseLeft" style="left:-18px; bottom:-28px; --rot:-10deg;" viewBox="0 0 220 320">
+            <defs>
+                <linearGradient id="petalGradL" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ffb3c9" stop-opacity=".85" />
+                    <stop offset=".55" stop-color="#ff5f96" stop-opacity=".55" />
+                    <stop offset="1" stop-color="#7a0724" stop-opacity=".65" />
+                </linearGradient>
+                <linearGradient id="stemGradL" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#0f3a26" stop-opacity=".9" />
+                    <stop offset="1" stop-color="#071f16" stop-opacity="1" />
+                </linearGradient>
+            </defs>
+
+            <!-- stem -->
+            <path d="M110 310 C 100 250, 120 210, 112 160 C 108 120, 95 92, 110 64" stroke="url(#stemGradL)"
+                stroke-width="10" fill="none" stroke-linecap="round" opacity=".95" />
+
+            <!-- petals group -->
+            <g transform="translate(110 90)">
+                <path class="petal p1" style="--rot:-18deg" d="M0 0 C -30 -18, -38 -55, 0 -70 C 38 -55, 30 -18, 0 0 Z"
+                    fill="url(#petalGradL)" opacity=".95" />
+                <path class="petal p2" style="--rot:12deg"
+                    d="M0 -6 C -38 -22, -62 -66, -18 -92 C 14 -110, 38 -82, 22 -48 C 14 -30, 6 -18, 0 -6 Z"
+                    fill="url(#petalGradL)" opacity=".85" />
+                <path class="petal p3" style="--rot:-8deg"
+                    d="M0 -8 C 38 -22, 62 -66, 18 -92 C -14 -110, -38 -82, -22 -48 C -14 -30, -6 -18, 0 -8 Z"
+                    fill="url(#petalGradL)" opacity=".85" />
+                <path class="petal p4" style="--rot:22deg"
+                    d="M0 2 C -40 4, -76 -30, -62 -68 C -48 -106, -6 -102, 6 -70 C 12 -50, 10 -20, 0 2 Z"
+                    fill="url(#petalGradL)" opacity=".70" />
+                <path class="petal p5" style="--rot:-22deg"
+                    d="M0 2 C 40 4, 76 -30, 62 -68 C 48 -106, 6 -102, -6 -70 C -12 -50, -10 -20, 0 2 Z"
+                    fill="url(#petalGradL)" opacity=".70" />
+                <path class="petal p6" style="--rot:0deg" d="M0 -12 C -16 -22, -20 -40, 0 -52 C 20 -40, 16 -22, 0 -12 Z"
+                    fill="url(#petalGradL)" opacity=".95" />
+            </g>
+
+            <!-- leaves -->
+            <path d="M104 178 C 70 168, 56 148, 50 134 C 74 138, 96 148, 112 160" fill="#0c3a27" opacity=".55" />
+            <path d="M116 190 C 150 180, 164 160, 170 146 C 146 150, 124 160, 108 172" fill="#0c3a27" opacity=".45" />
+        </svg>
+
+        <!-- Right rose -->
+        <svg class="rose" id="roseRight" style="right:-20px; bottom:-26px; --rot:10deg;" viewBox="0 0 220 320">
+            <defs>
+                <linearGradient id="petalGradR" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ffd1df" stop-opacity=".78" />
+                    <stop offset=".55" stop-color="#ff7aa8" stop-opacity=".50" />
+                    <stop offset="1" stop-color="#7a0724" stop-opacity=".68" />
+                </linearGradient>
+                <linearGradient id="stemGradR" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#103f2a" stop-opacity=".9" />
+                    <stop offset="1" stop-color="#061c14" stop-opacity="1" />
+                </linearGradient>
+            </defs>
+
+            <path d="M110 310 C 120 250, 98 210, 106 160 C 112 120, 126 92, 110 62" stroke="url(#stemGradR)"
+                stroke-width="10" fill="none" stroke-linecap="round" opacity=".95" />
+
+            <g transform="translate(110 88)">
+                <path class="petal p1" style="--rot:18deg" d="M0 0 C -30 -18, -38 -55, 0 -70 C 38 -55, 30 -18, 0 0 Z"
+                    fill="url(#petalGradR)" opacity=".95" />
+                <path class="petal p2" style="--rot:-12deg"
+                    d="M0 -6 C -38 -22, -62 -66, -18 -92 C 14 -110, 38 -82, 22 -48 C 14 -30, 6 -18, 0 -6 Z"
+                    fill="url(#petalGradR)" opacity=".85" />
+                <path class="petal p3" style="--rot:8deg"
+                    d="M0 -8 C 38 -22, 62 -66, 18 -92 C -14 -110, -38 -82, -22 -48 C -14 -30, -6 -18, 0 -8 Z"
+                    fill="url(#petalGradR)" opacity=".85" />
+                <path class="petal p4" style="--rot:-22deg"
+                    d="M0 2 C -40 4, -76 -30, -62 -68 C -48 -106, -6 -102, 6 -70 C 12 -50, 10 -20, 0 2 Z"
+                    fill="url(#petalGradR)" opacity=".70" />
+                <path class="petal p5" style="--rot:22deg"
+                    d="M0 2 C 40 4, 76 -30, 62 -68 C 48 -106, 6 -102, -6 -70 C -12 -50, -10 -20, 0 2 Z"
+                    fill="url(#petalGradR)" opacity=".70" />
+                <path class="petal p6" style="--rot:0deg" d="M0 -12 C -16 -22, -20 -40, 0 -52 C 20 -40, 16 -22, 0 -12 Z"
+                    fill="url(#petalGradR)" opacity=".95" />
+            </g>
+
+            <path d="M112 178 C 146 168, 160 148, 170 134 C 146 138, 124 148, 108 160" fill="#0c3a27" opacity=".55" />
+            <path d="M104 192 C 70 182, 56 162, 48 148 C 72 152, 94 162, 112 176" fill="#0c3a27" opacity=".45" />
+        </svg>
+
+        <!-- Bottom center rose -->
+        <svg class="rose" id="roseBottom"
+            style="left:50%; transform:translate(-50%, 60px) scale(.9); bottom:-36px; --rot:0deg;"
+            viewBox="0 0 260 360">
+            <defs>
+                <linearGradient id="petalGradB" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ffd1df" stop-opacity=".86" />
+                    <stop offset=".55" stop-color="#ff5f96" stop-opacity=".56" />
+                    <stop offset="1" stop-color="#7a0724" stop-opacity=".70" />
+                </linearGradient>
+                <linearGradient id="stemGradB" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#123f2b" stop-opacity=".95" />
+                    <stop offset="1" stop-color="#061b14" stop-opacity="1" />
+                </linearGradient>
+            </defs>
+
+            <path d="M130 350 C 112 280, 150 240, 134 180 C 122 136, 110 108, 130 78" stroke="url(#stemGradB)"
+                stroke-width="12" fill="none" stroke-linecap="round" opacity=".95" />
+
+            <g transform="translate(130 110)">
+                <path class="petal p1" style="--rot:-12deg" d="M0 0 C -36 -22, -46 -68, 0 -86 C 46 -68, 36 -22, 0 0 Z"
+                    fill="url(#petalGradB)" opacity=".95" />
+                <path class="petal p2" style="--rot:14deg"
+                    d="M0 -8 C -48 -28, -78 -84, -22 -118 C 18 -142, 48 -106, 28 -62 C 18 -36, 8 -20, 0 -8 Z"
+                    fill="url(#petalGradB)" opacity=".86" />
+                <path class="petal p3" style="--rot:-10deg"
+                    d="M0 -10 C 48 -28, 78 -84, 22 -118 C -18 -142, -48 -106, -28 -62 C -18 -36, -8 -20, 0 -10 Z"
+                    fill="url(#petalGradB)" opacity=".86" />
+                <path class="petal p4" style="--rot:22deg"
+                    d="M0 2 C -52 6, -102 -36, -86 -92 C -66 -158, -10 -152, 10 -98 C 20 -66, 16 -24, 0 2 Z"
+                    fill="url(#petalGradB)" opacity=".72" />
+                <path class="petal p5" style="--rot:-22deg"
+                    d="M0 2 C 52 6, 102 -36, 86 -92 C 66 -158, 10 -152, -10 -98 C -20 -66, -16 -24, 0 2 Z"
+                    fill="url(#petalGradB)" opacity=".72" />
+                <path class="petal p6" style="--rot:0deg" d="M0 -16 C -20 -28, -26 -50, 0 -66 C 26 -50, 20 -28, 0 -16 Z"
+                    fill="url(#petalGradB)" opacity=".98" />
+            </g>
+
+            <path d="M126 202 C 86 194, 62 168, 56 152 C 88 160, 112 176, 128 188" fill="#0c3a27" opacity=".55" />
+            <path d="M136 214 C 176 206, 198 180, 206 162 C 174 170, 150 186, 132 198" fill="#0c3a27" opacity=".45" />
+        </svg>
+    </div>
+
+    <!-- UI -->
+    <div class="topbar">
+        <div class="brand">
+            <div class="dot"></div>
+            <span>Valentine’s Night</span>
+        </div>
+    </div>
+
+    <main class="wrap">
+        <section class="hero" id="home">
+            <div class="headline">
+                <h1>For You</h1>
+                <div class="signature">with all my heart</div>
+                <p class="sub">
+                    Bu dəfə hədiyyə qutusu yox,
+                    sənin üçün yazılmış bir səhifə var..
+                </p>
+
+                <div class="heartbeat" aria-hidden="true">
+                    <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+                        <path d="M10 65 H120
+                     C150 65, 150 20, 180 20
+                     C210 20, 210 95, 240 95
+                     C265 95, 270 40, 292 40
+                     C308 40, 318 68, 330 68
+                     C345 68, 355 30, 372 30
+                     C395 30, 410 95, 440 95
+                     C470 95, 470 65, 500 65
+                     H590" />
+                    </svg>
+                </div>
+
+                <div class="cta" id="ctaWrap">
+                    <button class="glowbtn" id="openBtn" type="button">
+                        You Have a Message 💌
+                    </button>
+                </div>
+
+                <div class="hint">Soft glow • Gentle motion • Premium night</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" id="modal">
+            <div class="modalHearts" aria-hidden="true" id="modalHearts"></div>
+
+            <div class="modalHeader">
+                <h2 class="modalTitle">A Message</h2>
+                <button class="close" id="closeBtn" type="button" aria-label="Close">
+                    ✕
+                </button>
+            </div>
+
+            <div class="modalBody">
+                <div class="message">
+                    <em>My love,</em>
+                    Sevgi bəzən səsli olmur, sakitcə insanın içində böyüyür.
+                    Sən mənim o sakit, amma ən dərin hissimsən.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
